@@ -1,8 +1,32 @@
+@font-face {
+    font-family: 'inter';
+    src: url(../fonts/inter/Inter-VariableFont_slnt\,wght.ttf);
+}
 body{
-    display: flex;
-    background-color: #000;
+    background-color: #252525;
+    padding: 0;
+    margin: 0;
+    max-width:100%;
+	height:auto;
+    background-size: 100% contain;
+    background-image: url(../imagens/background_losa.png);
+    font-family: 'inter';
 }
 header{
     display: flex;
-    
+    justify-content: space-between;
+    background-color: #35812e;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    height: 5em;
+}
+header h1{
+    color: #fffb00;
+    -webkit-text-stroke: 1px #000000;
+}
+.img_home img{
+    width: 5em;
+}
+nav img{
+    width: 5em;
 }
