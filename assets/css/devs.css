@@ -1,0 +1,91 @@
+body{
+    font-family: helvetica;
+}
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+section{
+    display: flex;
+    flex-direction: row;
+}
+section div{
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+main div img{
+    width: 10rem;
+    border-radius: 50%;
+    border: 3px solid;
+}
+.devdesc{
+    border: 3px solid;
+    font-family: Arial;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.8em;
+}
+.dev1{
+    background-image: url(../imagens/background-profile.png);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+    width: 402px;
+    height: 410px;
+}
+.dev2{
+    background-image: url(../imagens/background-profile.png);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+    width: 402px;
+    height: 410px;
+}
+.dev3{
+    background-image: url(../imagens/background-profile.png);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+    width: 402px;
+    height: 410px;
+}
+.dev4{
+    background-image: url(../imagens/background-profile.png);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+    width: 402px;
+    height: 410px;
+}
+.dev5{
+    background-image: url(../imagens/background-profile.png);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+    width: 402px;
+    height: 410px;
+}
+.dev6{
+    background-image: url(../imagens/background-profile.png);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+    width: 402px;
+    height: 410px;
+}

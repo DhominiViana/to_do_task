@@ -10,7 +10,7 @@ body{
 	height:auto;
     background-size: 100% contain;
     background-image: url(../imagens/background_losa.png);
-    font-family: 'inter';
+    font-family: helvetica;
 }
 header{
     display: flex;
@@ -29,4 +29,19 @@ header h1{
 }
 nav img{
     width: 5em;
+}
+.img_home{
+    width: 33.33%;
+    display: flex;
+    justify-content: flex-start;
+}
+.logo_home{
+    width: 33.33%;
+    display: flex;
+    justify-content: center;
+}
+nav{
+    width: 33.33%;
+    display: flex;
+    justify-content: flex-end;
 }
