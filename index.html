@@ -27,7 +27,17 @@
         </nav>
     </header>
     <main>
-        
+        <div> 
+            <script>
+                function criarTextarea() {
+                    var textarea = document.createElement("textarea");
+                    document.body.appendChild(textarea);
+                }
+                var botao = document.getElementById("criarTextarea");
+                botao.addEventListener("click", criarTextarea);
+            </script>
+        </div> 
+        <button id="criarTextarea">Criar Textarea</button>
     </main>
     <footer>
 
