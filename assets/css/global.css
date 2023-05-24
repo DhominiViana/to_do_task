@@ -39,6 +39,7 @@ nav img{
     width: 33.33%;
     display: flex;
     justify-content: center;
+
 }
 nav{
     width: 33.33%;
@@ -46,5 +47,11 @@ nav{
     justify-content: flex-end;
 }
 textarea{
-    
+    resize: none;
+}
+section{
+    border: solid 5px;
+    display: flex;
+    flex-direction: column;
+    max-width: 50%;
 }
