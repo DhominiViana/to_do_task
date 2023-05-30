@@ -117,20 +117,15 @@ function formatarlembrete(lembrete){
     var html = "";
     html += '<div class="lembrete" id="' + lembrete.id + '">';
     html += '<div class"row">';
-    html += '<div class"col-6 text-left">';
-    html += '<i class="fa fa-calendar-alt" aria-hidden="true"></i>' + lembrete.data;
-    html += '</div>';
-    html += '<div class"col-6 text-right">';
-    html += '<i class="fa fa-windwos-close" aria-hidden="true"></i>';
+    html += '<div class="info">';
+    html += '<i class="fa fa-calendar-alt" aria-hidden="true">' + lembrete.data +'</i><i class="fa fa-window-close" aria-hidden="true"></i>';
     html += '</div>';
     html += '</div>';
-    html += '<br>';
     html += '<div class="row">';
-    html += '<div class="col-12">'
+    html += '<div class="texto">'
     html += lembrete.texto;
     html += '</div>';
     html += '</div>';
     html += '</div>';
-    html += '<br>';
     return html;
 }

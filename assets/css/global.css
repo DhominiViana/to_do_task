@@ -2,6 +2,9 @@
     font-family: 'inter';
     src: url(../fonts/inter/Inter-VariableFont_slnt\,wght.ttf);
 }
+html{
+    scroll-behavior: smooth;
+}
 body{
     background-color: #252525;
     padding: 0;
@@ -12,6 +15,9 @@ body{
     background-image: url(../imagens/background_losa.png);
     font-family: helvetica;
 }
+main{
+    padding: 0.2rem;
+}
 header{
     display: flex;
     justify-content: space-between;
@@ -19,6 +25,13 @@ header{
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
     height: 5em;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+.criarlembrete{
+    padding-top: 80px;
 }
 header h1{
     color: #fffb00;
@@ -50,8 +63,32 @@ textarea{
     resize: none;
 }
 section{
-    border: solid 5px;
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+#lembretes{
+    font-weight: 900;
+    color: #ff0000;
+}
+.info{
+    display: flex;
+    justify-content: space-between;
+}
+.info i{
+    padding-left: 2rem;
+}
+.texto{
+    padding-left: 1rem;
+    font-weight: 600;
+}
+.lembrete{
+    padding: 0.5rem;
+    border: solid 4px #fffb00;
+    border-radius: 15px;
+    background-size:100%;
+    color: #000000;
+    margin-bottom: 0.7rem;
+    backdrop-filter: blur(5px);
+    background-color: #ffffff;
 }
