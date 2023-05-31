@@ -52,6 +52,7 @@ function createTask(){
 
     //------ FUCTION PARA VERIFICAR SE EXISTE LEMBRETE --------
     comprovarLembrete(lembrete);
+    document.getElementById("texto").value = "";
     
 }
 // --------------------------------------------------------------------
@@ -111,8 +112,8 @@ function showLembrete(){
         document.getElementById("lembretes").innerHTML = html;
     }
 }
-// --------------------------------------------------------------------
-//------------------- FUCTION PARA EXIBIR OS LEMBRETES --------------------
+// ---------------------------------------------------------------------
+//------------------- FUCTION PARA EXIBIR OS LEMBRETES -----------------
 function formatarlembrete(lembrete){
     var html = "";
     html += '<div class="lembrete" id="' + lembrete.id + '">';
