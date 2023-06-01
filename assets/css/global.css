@@ -32,6 +32,9 @@ header{
 }
 .criarlembrete{
     padding-top: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 header h1{
     color: #fffb00;
@@ -59,24 +62,23 @@ nav{
     display: flex;
     justify-content: flex-end;
 }
-textarea{
+.desctask{
     resize: none;
-}
-section{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    border-radius: 15px;
+    border: #35812e solid 4px;
 }
 #lembretes{
     font-weight: 900;
     color: #ff0000;
+    display: flex;
+    flex-direction: column-reverse;
 }
 .info{
     display: flex;
     justify-content: space-between;
 }
 .info i{
-    padding-left: 2rem;
+    margin-left: 2rem;
 }
 .texto{
     padding-left: 1rem;
@@ -84,11 +86,26 @@ section{
 }
 .lembrete{
     padding: 0.5rem;
-    border: solid 4px #fffb00;
+    border: solid 4px #35812e;
     border-radius: 15px;
     background-size:100%;
     color: #000000;
     margin-bottom: 0.7rem;
     backdrop-filter: blur(5px);
-    background-color: #ffffff;
+    background-color: #cccccc;
+}
+.sec2{
+    width: 100%;
+    
+}
+.fa-window-close{
+    cursor: pointer;
+}
+.button{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.button button{
+    width: 100%;
 }

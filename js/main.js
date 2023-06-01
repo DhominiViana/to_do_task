@@ -1,9 +1,9 @@
-
 // ------------------------- TESTA SE O JS ESTA OK --------------------
 document.addEventListener('DOMContentLoaded', function(){
     console.log("Check?, Checked!");
     document.getElementById("buttonSave").onclick = createTask;
     showLembrete();
+    selectLembrete();
 });
 // --------------------------------------------------------------------
 // -------------- FUNCTION PARA VERIFICAR SE HÁ TEXTO -----------------
@@ -22,7 +22,6 @@ function showError(){
     html += '<div class="alert alert-danger" role="alert">';
     html += 'Por favor insira alguma coisa';
     html += '</div>';
-    
     document.getElementById('error').innerHTML = html;
 }
 // --------------------------------------------------------------------
@@ -34,26 +33,21 @@ function cleanError(){
 // ------------------ FUNCTION PARA CRIAR LEMBRETES -------------------
 function createTask(){
     var conteudoTextarea = document.getElementById("texto").value;
-
     if(!textvalid(conteudoTextarea)){
         showError();
         return;
     }
     cleanError();
-
     //------ CRIAR VARIAVEIS PARA TEMPO --------
     var referencia = new Date();
     var id = referencia.getTime();
     var data = referencia.toLocaleDateString();
     var texto =  conteudoTextarea;
-
     //JSON
     var lembrete = {"id" : id, "data" : data, "texto" : texto};
-
     //------ FUCTION PARA VERIFICAR SE EXISTE LEMBRETE --------
     comprovarLembrete(lembrete);
     document.getElementById("texto").value = "";
-    
 }
 // --------------------------------------------------------------------
 //----------------- FUCTION PARA VERIFICAR LEMBRETES ------------------
@@ -67,14 +61,12 @@ function lembreteValido(lembretesExistentes){
 }
 // --------------------------------------------------------------------
 //----------- FUCTION PARA VERIFICAR SE EXISTE LEMBRETE ---------------
-
 function comprovarLembrete(lembrete){
     var lembretesExistentes = localStorage.getItem("lembretes");
 
     if(!lembreteValido(lembretesExistentes)){
         var lembretes = [];
         lembretes.push(lembrete);
-
         //SAVE LEMBRETE
         saveLembretes(lembretes);
     }
@@ -100,7 +92,6 @@ function showLembrete(){
     var lembretesExistentes = localStorage.getItem("lembretes");
 
     if(!lembreteValido(lembretesExistentes)){
-
         html = "Não existe nenhum lembrete.";
         document.getElementById("lembretes").innerHTML = html;
     }
@@ -130,3 +121,58 @@ function formatarlembrete(lembrete){
     html += '</div>';
     return html;
 }
+// ---------------------------------------------------------------------
+//---------------- FUCTION PARA SELECIONAR OS LEMBRETES ----------------
+var lembretesSelecionados = [];
+function selectLembrete(){
+    var lembretes = document.getElementsByClassName("lembrete");
+    for(var i = 0; i < lembretes.length; i++){
+        document.getElementById(lembretes[i].id).onclick = function(e){
+            e.stopPropagation();
+            if(lembretesSelecionados.indexOf(this.id) == -1){
+                this.style.backgroundColor = "red";
+                lembretesSelecionados.push(this.id);
+            }
+            else{
+                this.style.backgroundColor = "#cccccc";
+                for(var b = 0; b < lembretesSelecionados.length; b++){
+                    if(lembretesSelecionados[b] == this.id){
+                        lembretesSelecionados[b] = 0;
+                    }
+                }
+            }
+            var lembreteTemporario = [];
+            for(var j = 0; j < lembretesSelecionados.length; j++){
+                if(lembretesSelecionados[j] != 0){
+                    lembreteTemporario.push(lembretesSelecionados[j]);
+                }
+            }
+            lembretesSelecionados = lembreteTemporario;
+        };
+    }
+    // Adicionar um botão de exclusão para excluir os itens selecionados
+    var botaoExcluir = document.getElementById("buttonDelete")
+    botaoExcluir.addEventListener('click', excluirLembreteSelecionado);
+}
+// ---------------------------------------------------------------------
+//------------ FUCTION PARA EXCLUIR OS ITENS SELECIONADOS --------------
+function excluirLembreteSelecionado() {
+  for (var i = 0; i < lembretesSelecionados.length; i++) {
+    var lembrete = document.getElementById(lembretesSelecionados[i]);
+    if (lembrete) {
+      lembrete.parentNode.removeChild(lembrete);
+    }
+  }
+  // ATUALIZAR O ARMAZENAMENTO LOCAL (localStorage) REMOVENDO OS LEMBRETES EXCLUÍDOS
+  var lembretesExistentes = localStorage.getItem("lembretes");
+  if (lembreteValido(lembretesExistentes)) {
+    var lembretesRecuperados = JSON.parse(lembretesExistentes);
+    lembretesRecuperados = lembretesRecuperados.filter(function(lembrete) {
+      return lembretesSelecionados.indexOf(lembrete.id.toString()) === -1;
+    });
+    saveLembretes(lembretesRecuperados);
+  }
+  // LIMPA O ARRAY DE LEMBRETES SELECIONADOS APÓS A EXCLUSÃO
+  lembretesSelecionados = []; 
+}
+// ---------------------------------------------------------------------
