@@ -1,9 +1,12 @@
 // ------------------------- TESTA SE O JS ESTA OK --------------------
+    // ESPERA ATÉ QUE O DOCUMENTO HTML SEJA COMPLETAMENTE CARREGADO ANTES DE EXECUTAR O CÓDIGO
 document.addEventListener('DOMContentLoaded', function(){
-    console.log("Check?, Checked!");
-    document.getElementById("buttonSave").onclick = createTask;
-    showLembrete();
-    selectLembrete();
+console.log("Check?, Checked!");
+
+    // DEFINE A FUNÇÃO CREATETASK PARA SER EXECUTADA QUANDO O BOTÃO "BUTTONSAVE" FOR CLICADO// Define a função createTask para ser executada quando o botão "buttonSave" for clicado
+document.getElementById("buttonSave").onclick = createTask;
+    showLembrete(); // CHAMA A FUNÇÃO PARA EXIBIR OS LEMBRETES
+    selectLembrete(); // CHAMA A FUNÇÃO PARA SELECIONAR OS LEMBRETES
 });
 // --------------------------------------------------------------------
 // -------------- FUNCTION PARA VERIFICAR SE HÁ TEXTO -----------------
@@ -34,23 +37,26 @@ function cleanError(){
 function createTask(){
     var conteudoTextarea = document.getElementById("texto").value;
     if(!textvalid(conteudoTextarea)){
-        showError();
+        showError(); // EXIBE UMA MENSAGEM DE ERRO SE O TEXTO NÃO FOR VÁLIDO
         return;
     }
-    cleanError();
+    cleanError(); // LIMPA A MENSAGEM DE ERRO
     //------ CRIAR VARIAVEIS PARA TEMPO --------
     var referencia = new Date();
     var id = referencia.getTime();
     var data = referencia.toLocaleDateString();
     var texto =  conteudoTextarea;
-    //JSON
+    // CRIA UM OBJETO LEMBRETE COM AS INFORMAÇÕES
     var lembrete = {"id" : id, "data" : data, "texto" : texto};
     //------ FUCTION PARA VERIFICAR SE EXISTE LEMBRETE --------
     comprovarLembrete(lembrete);
-    document.getElementById("texto").value = "";
-}
+    selectLembrete();
+    // VERIFICA SE EXISTEM LEMBRETES SALVOS E SALVA O NOVO LEMBRETE
+    document.getElementById("texto").value = ""; // LIMPA O CAMPO DE TEXTO
+} 
 // --------------------------------------------------------------------
 //----------------- FUCTION PARA VERIFICAR LEMBRETES ------------------
+        // VERIFICA SE OS LEMBRETES EXISTENTES SÃO VÁLIDOS
 function lembreteValido(lembretesExistentes){
     if(lembretesExistentes == null || lembretesExistentes == "" || typeof lembretesExistentes == "undefined" || lembretesExistentes == "undefined"){
         return false;
@@ -61,32 +67,34 @@ function lembreteValido(lembretesExistentes){
 }
 // --------------------------------------------------------------------
 //----------- FUCTION PARA VERIFICAR SE EXISTE LEMBRETE ---------------
+   // VERIFICA SE EXISTE ALGUM LEMBRETE E SALVA O LEMBRETE ATUAL
 function comprovarLembrete(lembrete){
     var lembretesExistentes = localStorage.getItem("lembretes");
-
     if(!lembreteValido(lembretesExistentes)){
         var lembretes = [];
         lembretes.push(lembrete);
         //SAVE LEMBRETE
-        saveLembretes(lembretes);
+        saveLembretes(lembretes); // SALVA OS LEMBRETES
     }
     else{
         var lembretesRecuperados = JSON.parse(lembretesExistentes);
         //SAVE LEMBRETE
         lembretesRecuperados.push(lembrete);
-        saveLembretes(lembretesRecuperados);
+        saveLembretes(lembretesRecuperados); // SALVA OS LEMBRETES
     }
     // GRAVAR TODOS OS DADOS
-    showLembrete();
+    showLembrete(); // EXIBE OS LEMBRETES ATUALIZADOS
 }
 // --------------------------------------------------------------------
 //----------------- FUCTION PARA SALVAR OS LEMBRETES ------------------
+        // SALVA OS LEMBRETES NO ARMAZENAMENTO LOCAL (LOCALSTORAGE)
 function saveLembretes(lembretes){
     var lembretesJSON = JSON.stringify(lembretes);
     localStorage.setItem("lembretes", lembretesJSON,);
 }
 // --------------------------------------------------------------------
 //------------------- FUCTION PARA EXIBIR OS ITENS --------------------
+    // EXIBE OS LEMBRETES NA PÁGINA
 function showLembrete(){
     var html = "";
     var lembretesExistentes = localStorage.getItem("lembretes");
@@ -105,6 +113,7 @@ function showLembrete(){
 }
 // ---------------------------------------------------------------------
 //------------------- FUCTION PARA EXIBIR OS LEMBRETES -----------------
+   // FORMATA UM LEMBRETE PARA EXIBIÇÃO NA PÁGINA
 function formatarlembrete(lembrete){
     var html = "";
     html += '<div class="lembrete" id="' + lembrete.id + '">';
@@ -114,15 +123,16 @@ function formatarlembrete(lembrete){
     html += '</div>';
     html += '</div>';
     html += '<div class="row">';
-    html += '<div class="texto">'
+    html += '<p class="texto">'
     html += lembrete.texto;
-    html += '</div>';
+    html += '</p>';
     html += '</div>';
     html += '</div>';
     return html;
 }
 // ---------------------------------------------------------------------
 //---------------- FUCTION PARA SELECIONAR OS LEMBRETES ----------------
+   // SELECIONA UM LEMBRETE QUANDO CLICADO
 var lembretesSelecionados = [];
 function selectLembrete(){
     var lembretes = document.getElementsByClassName("lembrete");
@@ -130,17 +140,18 @@ function selectLembrete(){
         document.getElementById(lembretes[i].id).onclick = function(e){
             e.stopPropagation();
             if(lembretesSelecionados.indexOf(this.id) == -1){
-                this.style.backgroundColor = "red";
-                lembretesSelecionados.push(this.id);
+                this.style.borderColor = "red"; // MUDA A COR DE FUNDO DO LEMBRETE PARA INDICAR QUE FOI SELECIONADO
+                lembretesSelecionados.push(this.id); // ADICIONA O ID DO LEMBRETE AOS LEMBRETES SELECIONADOS
             }
             else{
-                this.style.backgroundColor = "#cccccc";
+                this.style.borderColor = "#35812e"; // RESTAURA A COR DE FUNDO ORIGINAL DO LEMBRETE
                 for(var b = 0; b < lembretesSelecionados.length; b++){
                     if(lembretesSelecionados[b] == this.id){
-                        lembretesSelecionados[b] = 0;
+                        lembretesSelecionados[b] = 0; // REMOVE O ID DO LEMBRETE DOS LEMBRETES SELECIONADOS
                     }
                 }
             }
+            // REMOVE O ID DO LEMBRETE DOS LEMBRETES SELECIONADOS
             var lembreteTemporario = [];
             for(var j = 0; j < lembretesSelecionados.length; j++){
                 if(lembretesSelecionados[j] != 0){
@@ -150,7 +161,7 @@ function selectLembrete(){
             lembretesSelecionados = lembreteTemporario;
         };
     }
-    // Adicionar um botão de exclusão para excluir os itens selecionados
+    // ADICIONA UM BOTÃO DE EXCLUSÃO PARA EXCLUIR OS ITENS SELECIONADOS
     var botaoExcluir = document.getElementById("buttonDelete")
     botaoExcluir.addEventListener('click', excluirLembreteSelecionado);
 }
@@ -176,3 +187,42 @@ function excluirLembreteSelecionado() {
   lembretesSelecionados = []; 
 }
 // ---------------------------------------------------------------------
+// //------------ FUCTION PARA EXIBIR AS IMAGENS DE AJUDA --------------
+function exibirImagensPopup() {
+    var imagens = [
+    "../assets/imagens/help1.png",
+    "../assets/imagens/help2.png",
+    "../assets/imagens/help3.png",
+    "../assets/imagens/help4.png",
+    "../assets/imagens/help5.png",
+    "../assets/imagens/help6.png"
+    ];
+    var indiceAtual = 0;
+  
+    function exibir() {
+      var popup = document.getElementById("popup");
+      var imagemAtual = document.getElementById("imagem");
+      imagemAtual.src = imagens[indiceAtual];
+      popup.style.display = "block";
+    }
+  
+    function proximo() {
+      indiceAtual++;
+      if (indiceAtual >= imagens.length) {
+        ocultar();
+      } else {
+        exibir();
+      }
+    }
+  
+    function ocultar() {
+      var popup = document.getElementById("popup");
+      popup.style.display = "none";
+    }
+  
+    var botaoProximo = document.getElementById("botao-proximo");
+    botaoProximo.addEventListener("click", proximo);
+  
+    exibir();
+  }
+  
