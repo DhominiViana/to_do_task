@@ -190,22 +190,22 @@ function excluirLembreteSelecionado() {
 // //------------ FUCTION PARA EXIBIR AS IMAGENS DE AJUDA --------------
 function exibirImagensPopup() {
     var imagens = [
-    "../assets/imagens/help1.png",
-    "../assets/imagens/help2.png",
-    "../assets/imagens/help3.png",
-    "../assets/imagens/help4.png",
-    "../assets/imagens/help5.png",
-    "../assets/imagens/help6.png"
+    "../assets/imagens/help_1.png",
+    "../assets/imagens/help_2.png",
+    "../assets/imagens/help_3.png",
+    "../assets/imagens/help_4.png",
+    "../assets/imagens/help_5.png",
+    "../assets/imagens/help_6.png"
     ];
     var indiceAtual = 0;
-  
+
     function exibir() {
       var popup = document.getElementById("popup");
       var imagemAtual = document.getElementById("imagem");
       imagemAtual.src = imagens[indiceAtual];
       popup.style.display = "block";
     }
-  
+
     function proximo() {
       indiceAtual++;
       if (indiceAtual >= imagens.length) {
@@ -214,15 +214,15 @@ function exibirImagensPopup() {
         exibir();
       }
     }
-  
+
     function ocultar() {
       var popup = document.getElementById("popup");
       popup.style.display = "none";
     }
-  
+
     var botaoProximo = document.getElementById("botao-proximo");
     botaoProximo.addEventListener("click", proximo);
-  
+
     exibir();
   }
   
